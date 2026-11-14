@@ -2,6 +2,20 @@
 (() => {
   const canvas=document.getElementById("game"),cover=document.getElementById("cover"),start=document.getElementById("start"),status=document.getElementById("status"),detail=document.getElementById("detail"),progress=document.getElementById("progress"),retry=document.getElementById("retry"),fullscreen=document.getElementById("fullscreen"),player=document.getElementById("player");
   let instance=null,loading=false;
+  const modes=document.createElement("div"),windowed=document.createElement("button"),fullscreenToolbar=document.createElement("div"),exitFullscreen=document.createElement("button");
+  modes.className="play-modes";modes.setAttribute("role","group");modes.setAttribute("aria-label","游玩方式");
+  windowed.type="button";windowed.textContent="网页游玩";windowed.setAttribute("aria-pressed","true");
+  fullscreen.textContent="全屏游玩";fullscreen.setAttribute("aria-pressed","false");
+  fullscreen.replaceWith(modes);modes.append(windowed,fullscreen);
+  fullscreenToolbar.id="fullscreen-toolbar";
+  const modeLabel=document.createElement("span");modeLabel.textContent="黎明之路 · 全屏游玩";
+  exitFullscreen.id="exit-fullscreen";exitFullscreen.type="button";exitFullscreen.textContent="返回网页 · Esc";
+  fullscreenToolbar.append(modeLabel,exitFullscreen);player.prepend(fullscreenToolbar);
+  function inFullscreen(){return document.fullscreenElement===player||document.webkitFullscreenElement===player;}
+  function syncMode(){const active=inFullscreen();windowed.setAttribute("aria-pressed",String(!active));fullscreen.setAttribute("aria-pressed",String(active));if(instance)canvas.focus();}
+  async function returnToPage(){try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();}finally{syncMode();}}
+  windowed.addEventListener("click",returnToPage);exitFullscreen.addEventListener("click",returnToPage);
+  document.addEventListener("fullscreenchange",syncMode);document.addEventListener("webkitfullscreenchange",syncMode);
   function fail(message){status.textContent="游戏暂时没有加载成功";detail.textContent=message;progress.hidden=true;start.hidden=true;retry.hidden=false;cover.hidden=false;cover.style.display="flex";console.error(message);}
   retry.addEventListener("click",()=>location.reload());
   start.addEventListener("click",async()=>{
@@ -17,7 +31,12 @@
       cover.style.display="none";fullscreen.disabled=false;canvas.focus();
     }catch(error){fail(error.message||String(error));}
   });
-  fullscreen.addEventListener("click",()=>{if(!instance)return;if(player.requestFullscreen)player.requestFullscreen().then(()=>canvas.focus()).catch(()=>{canvas.focus();});else instance.SetFullscreen(1);});
+  fullscreen.addEventListener("click",async()=>{
+    if(!instance)return;
+    if(inFullscreen()){await returnToPage();return;}
+    try{if(player.requestFullscreen)await player.requestFullscreen();else if(player.webkitRequestFullscreen)player.webkitRequestFullscreen();else instance.SetFullscreen(1);canvas.focus();}
+    catch{canvas.focus();}
+  });
   canvas.addEventListener("pointerdown",()=>canvas.focus());
   canvas.addEventListener("contextmenu",event=>event.preventDefault());
   canvas.addEventListener("keydown",event=>{if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(event.code))event.preventDefault();});
