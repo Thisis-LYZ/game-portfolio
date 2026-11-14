@@ -1,15 +1,15 @@
 {
-  "loaderUrl": "Build/Web.loader.js?v=completion-v12",
+  "loaderUrl": "Build/Web.loader.js?v=completion-v13",
   "config": {
     "arguments": [],
-    "dataUrl": "Build/Web.data.unityweb?v=completion-v12",
-    "frameworkUrl": "Build/Web.framework.js.unityweb?v=completion-v12",
-    "codeUrl": "Build/Web.wasm.unityweb?v=completion-v12",
+    "dataUrl": "Build/Web.data.unityweb?v=completion-v13",
+    "frameworkUrl": "Build/Web.framework.js.unityweb?v=completion-v13",
+    "codeUrl": "Build/Web.wasm.unityweb?v=completion-v13",
     "streamingAssetsUrl": "StreamingAssets",
     "companyName": "DawnTrailArt",
     "productName": "黎明之路",
     "productVersion": "1.0",
     "autoSyncPersistentDataPath": true
   },
-  "revision": "completion-v12"
+  "revision": "completion-v13"
 }
