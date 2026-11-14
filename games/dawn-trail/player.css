@@ -37,3 +37,17 @@
 @container(max-width:650px){.title-heading h1{--title-ink:1px;font-size:44px}}
 @container(max-width:420px){.title-heading h1{font-size:33px}}
 @media(max-width:650px){.title-panel{bottom:4%;width:200px}.title-panel #detail{font-size:11px;margin-top:7px}.title-panel #start,.title-panel #retry{padding:7px 8px;font-size:22px}.title-heading{top:4%}}
+
+/* In-game atlas frame and DawnPixelMeter styling for loading/error states. */
+.rpg-panel-skin{position:absolute;inset:0;display:none;grid-template-columns:12px minmax(0,1fr) 12px;grid-template-rows:12px minmax(0,1fr) 12px;pointer-events:none;z-index:-1}
+.rpg-panel-skin>span{position:relative;overflow:hidden}.rpg-panel-skin img{position:absolute;max-width:none;image-rendering:pixelated}.rpg-panel-fill{background:#101522}
+.rpg-loading-meter{display:none;width:100%;height:20px;image-rendering:pixelated;margin:14px 0}
+#cover[data-state="loading"] .title-panel,#cover[data-state="error"] .title-panel{width:min(540px,88%);padding:24px;background:none;isolation:isolate}
+#cover[data-state="loading"] .rpg-panel-skin,#cover[data-state="error"] .rpg-panel-skin{display:grid}
+#cover[data-state="loading"] .rpg-loading-meter{display:block}
+#cover[data-state="loading"] #status,#cover[data-state="error"] #status{font-size:22px;line-height:1.5;margin:0;overflow-wrap:anywhere}
+#cover[data-state="loading"] #detail,#cover[data-state="error"] #detail{font-size:14px;line-height:1.6;margin:12px 0 0;text-shadow:none}
+#cover[data-state="error"] #retry{margin-top:16px}
+.return-home{display:inline-flex;align-items:center;justify-content:center;font-size:14px;padding:7px 14px;color:#e8e3d9;border:2px solid #64778a;text-decoration:none;background:#222e3c;white-space:nowrap}.return-home:hover{background:#34485a}.return-home:focus-visible{outline:3px solid #a4dcf0;outline-offset:4px}
+.fullscreen-actions{display:flex;gap:8px;align-items:center}.fullscreen-actions .return-home{padding:3px 12px;font-size:12px}
+@media(max-width:650px){header{flex-wrap:wrap;gap:8px;padding:6px 0 10px}.play-modes{flex-wrap:wrap;gap:6px}.play-modes button,.return-home{font-size:12px;padding:6px 10px}#cover[data-state="loading"] .title-panel,#cover[data-state="error"] .title-panel{padding:20px}#cover[data-state="loading"] #status,#cover[data-state="error"] #status{font-size:18px}#cover[data-state="loading"] #detail,#cover[data-state="error"] #detail{font-size:12px}}
