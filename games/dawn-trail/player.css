@@ -8,7 +8,7 @@
 @font-face{font-family:DawnPixel;src:url("dawn-pixel-ui.woff2") format("woff2");font-style:normal;font-weight:400;font-display:swap}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 #cover{padding:0;background:#080d14;z-index:2}
-.title-screen{position:absolute;inset:0;container-type:inline-size}
+.title-screen{position:absolute;left:0;top:0;width:100%;height:100%;container-type:inline-size}
 #cover-art{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
 .title-heading{position:absolute;left:50%;top:5%;transform:translateX(-50%);width:max-content;max-width:90%;text-align:center;font-family:DawnPixel,monospace;color:#ffe3a1;text-shadow:4px 0 #111827,-4px 0 #111827,0 4px #111827,0 -4px #111827,4px 4px #111827,-4px 4px #111827,4px -4px #111827,-4px -4px #111827,0 8px #704b23}
 .title-heading h1{font-size:66px;font-weight:400;line-height:1.2;letter-spacing:.12em;margin:0 0 4px .12em}
@@ -33,7 +33,6 @@
 #cover[data-state="loading"] .title-panel,#cover[data-state="error"] .title-panel{background:#08182df5}
 #fullscreen-toolbar{position:relative;z-index:3}
 #player:fullscreen #cover,#player:-webkit-full-screen #cover{top:38px}
-#player:fullscreen .title-screen,#player:-webkit-full-screen .title-screen{inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100vw,calc((100vh - 38px)*16/9));width:min(100vw,calc((100dvh - 38px)*16/9));height:min(calc(100vh - 38px),calc(100vw*9/16));height:min(calc(100dvh - 38px),calc(100vw*9/16))}
 @container(max-width:850px){.title-heading h1{font-size:44px}.title-heading p{font-size:11px}}
 @container(max-width:650px){.title-heading h1{font-size:33px}}
 @media(max-width:650px){.title-panel{bottom:4%;width:200px}.title-panel #detail{font-size:11px;margin-top:7px}.title-panel #start,.title-panel #retry{padding:7px 8px;font-size:22px}.title-heading{top:4%}.title-heading h1{font-size:33px}}

@@ -2,6 +2,19 @@
 (() => {
   const canvas=document.getElementById("game"),cover=document.getElementById("cover"),start=document.getElementById("start"),status=document.getElementById("status"),detail=document.getElementById("detail"),progress=document.getElementById("progress"),retry=document.getElementById("retry"),fullscreen=document.getElementById("fullscreen"),player=document.getElementById("player");
   let instance=null,loading=false;
+  const titleScreen=cover.querySelector(".title-screen");
+  function fitTitleArt(){
+    const ratio=window.devicePixelRatio||1,w=cover.clientWidth,h=cover.clientHeight;
+    if(!w||!h)return;
+    const unit=Math.floor(Math.min(w*ratio/320,h*ratio/180));
+    if(unit<1)return;
+    const width=320*unit/ratio,height=180*unit/ratio;
+    titleScreen.style.width=width+"px";titleScreen.style.height=height+"px";
+    titleScreen.style.left=Math.round((w-width)*ratio/2)/ratio+"px";
+    titleScreen.style.top=Math.round((h-height)*ratio/2)/ratio+"px";
+  }
+  if(window.ResizeObserver)new ResizeObserver(fitTitleArt).observe(cover);
+  window.addEventListener("resize",fitTitleArt);fitTitleArt();
   const modes=document.createElement("div"),windowed=document.createElement("button"),fullscreenToolbar=document.createElement("div"),exitFullscreen=document.createElement("button");
   modes.className="play-modes";modes.setAttribute("role","group");modes.setAttribute("aria-label","游玩方式");
   windowed.type="button";windowed.textContent="网页游玩";windowed.setAttribute("aria-pressed","true");
@@ -12,7 +25,7 @@
   exitFullscreen.id="exit-fullscreen";exitFullscreen.type="button";exitFullscreen.textContent="返回网页 · Esc";
   fullscreenToolbar.append(modeLabel,exitFullscreen);player.prepend(fullscreenToolbar);
   function inFullscreen(){return document.fullscreenElement===player||document.webkitFullscreenElement===player;}
-  function syncMode(){const active=inFullscreen();windowed.setAttribute("aria-pressed",String(!active));fullscreen.setAttribute("aria-pressed",String(active));if(instance)canvas.focus();else if(!loading)start.focus();}
+  function syncMode(){const active=inFullscreen();windowed.setAttribute("aria-pressed",String(!active));fullscreen.setAttribute("aria-pressed",String(active));fitTitleArt();if(instance)canvas.focus();else if(!loading)start.focus();}
   async function returnToPage(){try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();}finally{syncMode();}}
   windowed.addEventListener("click",returnToPage);exitFullscreen.addEventListener("click",returnToPage);
   document.addEventListener("fullscreenchange",syncMode);document.addEventListener("webkitfullscreenchange",syncMode);
