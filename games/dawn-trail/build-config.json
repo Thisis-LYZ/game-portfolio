@@ -1,0 +1,14 @@
+{
+  "loaderUrl": "Build/Web.loader.js",
+  "config": {
+    "arguments": [],
+    "dataUrl": "Build/Web.data.unityweb",
+    "frameworkUrl": "Build/Web.framework.js.unityweb",
+    "codeUrl": "Build/Web.wasm.unityweb",
+    "streamingAssetsUrl": "StreamingAssets",
+    "companyName": "DawnTrailArt",
+    "productName": "黎明之路",
+    "productVersion": "1.0",
+    "autoSyncPersistentDataPath": true
+  }
+}
