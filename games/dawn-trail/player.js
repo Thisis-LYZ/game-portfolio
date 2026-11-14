@@ -40,5 +40,22 @@
   canvas.addEventListener("pointerdown",()=>canvas.focus());
   canvas.addEventListener("contextmenu",event=>event.preventDefault());
   canvas.addEventListener("keydown",event=>{if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(event.code))event.preventDefault();});
+  // Reuse DawnRpgUI.Button's exact atlas rectangles and 3 px nine-slice border.
+  for(const button of [start,retry]){
+    const label=document.createElement("span");label.className="rpg-button-label";label.textContent=button.textContent;button.textContent="";
+    for(const [state,sourceX] of [["normal",0],["hover",48]]){
+      const skin=document.createElement("span");skin.className="rpg-button-skin "+state;skin.setAttribute("aria-hidden","true");
+      for(let row=0;row<3;row++)for(let col=0;col<3;col++){
+        const piece=document.createElement("span");
+        if(row===1&&col===1){piece.className="rpg-button-fill";skin.append(piece);continue;}
+        const sx=sourceX+[0,3,45][col],sy=160+[0,3,13][row],sw=[3,42,3][col],sh=[3,10,3][row];
+        const img=document.createElement("img");img.src="rpg-ui.png";img.alt="";img.draggable=false;
+        img.style.cssText=`width:${1024/sw*100}%;height:${1024/sh*100}%;left:${-sx/sw*100}%;top:${-sy/sh*100}%;`;
+        piece.append(img);skin.append(piece);
+      }
+      button.append(skin);
+    }
+    button.append(label);
+  }
   start.focus({preventScroll:true});
 })();

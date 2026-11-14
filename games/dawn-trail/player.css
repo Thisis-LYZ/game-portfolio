@@ -13,11 +13,21 @@
 .title-heading{position:absolute;left:50%;top:5%;transform:translateX(-50%);width:max-content;max-width:90%;text-align:center;font-family:DawnPixel,monospace;color:#ffe3a1;text-shadow:4px 0 #111827,-4px 0 #111827,0 4px #111827,0 -4px #111827,4px 4px #111827,-4px 4px #111827,4px -4px #111827,-4px -4px #111827,0 8px #704b23}
 .title-heading h1{font-size:66px;font-weight:400;line-height:1.2;letter-spacing:.12em;margin:0 0 4px .12em}
 .title-heading p{font-size:22px;line-height:1.3;letter-spacing:.2em;margin:0 0 0 .2em;color:#fff1cd}
-.title-panel{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);width:clamp(220px,30%,310px);padding:10px;background:#08182de8;border:2px solid #7491af;box-shadow:0 0 0 2px #081325,inset 0 0 0 2px #1f3551;text-align:center;font-family:DawnPixel,monospace}
+.title-panel{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);width:clamp(240px,32%,340px);padding:0;background:none;border:0;box-shadow:none;text-align:center;font-family:DawnPixel,monospace}
 #cover[data-state="ready"] #status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-.title-panel #start,.title-panel #retry{width:100%;min-width:0;font-family:DawnPixel,monospace;font-size:22px;font-weight:400;letter-spacing:.15em;padding:10px 8px;background:#e0b354;border-color:#ffe3a1;box-shadow:inset 0 0 0 2px #9b6e35,0 3px 0 #443012}
-.title-panel #start:hover{background:#f0c769;transform:translateY(-1px)}
-.title-panel #detail{font-size:11px;line-height:1.45;margin:10px 0 0;color:#d0dfed}
+.title-panel #start,.title-panel #retry{position:relative;width:100%;min-width:0;min-height:56px;font-family:DawnPixel,monospace;font-size:22px;font-weight:400;letter-spacing:.15em;padding:12px 14px;background:none;border:0;box-shadow:none;color:#eee6dc;isolation:isolate;filter:none}
+.title-panel #start:hover,.title-panel #retry:hover{background:none;transform:none;filter:none}
+.title-panel #start:active,.title-panel #retry:active{transform:translateY(2px)}
+.rpg-button-label{position:relative;z-index:1}
+.rpg-button-skin{position:absolute;inset:0;display:grid;grid-template-columns:6px minmax(0,1fr) 6px;grid-template-rows:6px minmax(0,1fr) 6px;pointer-events:none;z-index:0}
+.rpg-button-skin>span{position:relative;overflow:hidden}
+.rpg-button-skin img{position:absolute;max-width:none;image-rendering:pixelated}
+.rpg-button-fill{background:rgb(64,38,46)}
+.rpg-button-skin.hover{visibility:hidden}
+.rpg-button-skin.hover .rpg-button-fill{background:rgb(115,74,36)}
+.title-panel button:hover .rpg-button-skin.hover,.title-panel button:focus-visible .rpg-button-skin.hover{visibility:visible}
+.title-panel button:hover .rpg-button-skin.normal,.title-panel button:focus-visible .rpg-button-skin.normal{visibility:hidden}
+.title-panel #detail{font-size:11px;line-height:1.45;margin:10px 0 0;color:#d0dfed;text-shadow:1px 1px #081325,-1px -1px #081325,1px -1px #081325,-1px 1px #081325}
 .title-panel #status{font-size:14px;line-height:1.5;margin:0 0 10px;letter-spacing:0}
 .title-panel progress{width:100%;height:14px}
 #cover[data-state="loading"] .title-panel,#cover[data-state="error"] .title-panel{background:#08182df5}
@@ -26,4 +36,4 @@
 #player:fullscreen .title-screen,#player:-webkit-full-screen .title-screen{inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100vw,calc((100vh - 38px)*16/9));width:min(100vw,calc((100dvh - 38px)*16/9));height:min(calc(100vh - 38px),calc(100vw*9/16));height:min(calc(100dvh - 38px),calc(100vw*9/16))}
 @container(max-width:850px){.title-heading h1{font-size:44px}.title-heading p{font-size:11px}}
 @container(max-width:650px){.title-heading h1{font-size:33px}}
-@media(max-width:650px){.title-panel{bottom:4%;width:200px;padding:7px}.title-panel #detail{font-size:11px;margin-top:7px}.title-panel #start,.title-panel #retry{padding:7px 8px;font-size:22px}.title-heading{top:4%}.title-heading h1{font-size:33px}}
+@media(max-width:650px){.title-panel{bottom:4%;width:200px}.title-panel #detail{font-size:11px;margin-top:7px}.title-panel #start,.title-panel #retry{padding:7px 8px;font-size:22px}.title-heading{top:4%}.title-heading h1{font-size:33px}}
