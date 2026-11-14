@@ -12,16 +12,17 @@
   exitFullscreen.id="exit-fullscreen";exitFullscreen.type="button";exitFullscreen.textContent="返回网页 · Esc";
   fullscreenToolbar.append(modeLabel,exitFullscreen);player.prepend(fullscreenToolbar);
   function inFullscreen(){return document.fullscreenElement===player||document.webkitFullscreenElement===player;}
-  function syncMode(){const active=inFullscreen();windowed.setAttribute("aria-pressed",String(!active));fullscreen.setAttribute("aria-pressed",String(active));if(instance)canvas.focus();}
+  function syncMode(){const active=inFullscreen();windowed.setAttribute("aria-pressed",String(!active));fullscreen.setAttribute("aria-pressed",String(active));if(instance)canvas.focus();else if(!loading)start.focus();}
   async function returnToPage(){try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();}finally{syncMode();}}
   windowed.addEventListener("click",returnToPage);exitFullscreen.addEventListener("click",returnToPage);
   document.addEventListener("fullscreenchange",syncMode);document.addEventListener("webkitfullscreenchange",syncMode);
-  function fail(message){status.textContent="游戏暂时没有加载成功";detail.textContent=message;progress.hidden=true;start.hidden=true;retry.hidden=false;cover.hidden=false;cover.style.display="flex";console.error(message);}
+  fullscreen.disabled=false;
+  function fail(message){cover.dataset.state="error";status.textContent="游戏暂时没有加载成功";detail.textContent=message;progress.hidden=true;start.hidden=true;retry.hidden=false;cover.hidden=false;cover.style.display="flex";console.error(message);}
   retry.addEventListener("click",()=>location.reload());
   start.addEventListener("click",async()=>{
     if(loading)return;
     if(!window.WebAssembly){fail("当前浏览器不支持游戏运行，请使用较新的电脑浏览器。");return;}
-    loading=true;start.hidden=true;progress.hidden=false;status.textContent="正在准备冒险……";detail.textContent="首次加载较慢，请保持页面打开。";
+    loading=true;cover.dataset.state="loading";start.hidden=true;progress.hidden=false;status.textContent="正在准备冒险……";detail.textContent="首次加载需要一点时间，请保持页面打开。";
     try{
       const response=await fetch("build-config.json");if(!response.ok)throw new Error("游戏资源暂未就绪，请稍后重试。");
       const build=await response.json();
@@ -32,12 +33,12 @@
     }catch(error){fail(error.message||String(error));}
   });
   fullscreen.addEventListener("click",async()=>{
-    if(!instance)return;
     if(inFullscreen()){await returnToPage();return;}
-    try{if(player.requestFullscreen)await player.requestFullscreen();else if(player.webkitRequestFullscreen)player.webkitRequestFullscreen();else instance.SetFullscreen(1);canvas.focus();}
-    catch{canvas.focus();}
+    try{if(player.requestFullscreen)await player.requestFullscreen();else if(player.webkitRequestFullscreen)player.webkitRequestFullscreen();else if(instance)instance.SetFullscreen(1);syncMode();}
+    catch{syncMode();}
   });
   canvas.addEventListener("pointerdown",()=>canvas.focus());
   canvas.addEventListener("contextmenu",event=>event.preventDefault());
   canvas.addEventListener("keydown",event=>{if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(event.code))event.preventDefault();});
+  start.focus({preventScroll:true});
 })();
