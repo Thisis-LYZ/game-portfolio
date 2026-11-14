@@ -1784,7 +1784,7 @@
   const button = form.querySelector("button");
   const fromBase64 = (value) => Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
   const readCached = () => {
-    try { ["pixel-gothic-portfolio:unlocked:v1","pixel-gothic-portfolio:unlocked:v2","pixel-gothic-portfolio:unlocked:v3","pixel-gothic-portfolio:unlocked:v4","pixel-gothic-portfolio:unlocked:v5","pixel-gothic-portfolio:unlocked:v6","pixel-gothic-portfolio:unlocked:v7","pixel-gothic-portfolio:unlocked:v8"].forEach(key=>sessionStorage.removeItem(key));return sessionStorage.getItem(storageKey); } catch { return null; }
+    try { ["pixel-gothic-portfolio:unlocked:v1","pixel-gothic-portfolio:unlocked:v2","pixel-gothic-portfolio:unlocked:v3","pixel-gothic-portfolio:unlocked:v4","pixel-gothic-portfolio:unlocked:v5","pixel-gothic-portfolio:unlocked:v6","pixel-gothic-portfolio:unlocked:v7","pixel-gothic-portfolio:unlocked:v8","pixel-gothic-portfolio:unlocked:v9"].forEach(key=>sessionStorage.removeItem(key));return sessionStorage.getItem(storageKey); } catch { return null; }
   };
   const writeCached = (html) => {
     try { sessionStorage.setItem(storageKey, html); } catch {}
