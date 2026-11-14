@@ -1,14 +1,15 @@
 {
-  "loaderUrl": "Build/Web.loader.js",
+  "loaderUrl": "Build/Web.loader.js?v=interaction-fix-v11",
   "config": {
     "arguments": [],
-    "dataUrl": "Build/Web.data.unityweb",
-    "frameworkUrl": "Build/Web.framework.js.unityweb",
-    "codeUrl": "Build/Web.wasm.unityweb",
+    "dataUrl": "Build/Web.data.unityweb?v=interaction-fix-v11",
+    "frameworkUrl": "Build/Web.framework.js.unityweb?v=interaction-fix-v11",
+    "codeUrl": "Build/Web.wasm.unityweb?v=interaction-fix-v11",
     "streamingAssetsUrl": "StreamingAssets",
     "companyName": "DawnTrailArt",
     "productName": "黎明之路",
     "productVersion": "1.0",
     "autoSyncPersistentDataPath": true
-  }
+  },
+  "revision": "interaction-fix-v11"
 }

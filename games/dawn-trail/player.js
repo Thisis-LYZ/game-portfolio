@@ -37,7 +37,7 @@
     if(!window.WebAssembly){fail("当前浏览器不支持游戏运行，请使用较新的电脑浏览器。");return;}
     loading=true;cover.dataset.state="loading";start.hidden=true;progress.hidden=false;status.textContent="正在准备冒险……";detail.textContent="首次加载需要一点时间，请保持页面打开。";
     try{
-      const response=await fetch("build-config.json");if(!response.ok)throw new Error("游戏资源暂未就绪，请稍后重试。");
+      const response=await fetch("build-config.json",{cache:"no-store"});if(!response.ok)throw new Error("游戏资源暂未就绪，请稍后重试。");
       const build=await response.json();
       await new Promise((resolve,reject)=>{const s=document.createElement("script");s.src=build.loaderUrl;s.onload=resolve;s.onerror=()=>reject(new Error("游戏加载器下载失败，请检查网络后重试。"));document.body.appendChild(s);});
       const config={...build.config,devicePixelRatio:Math.min(window.devicePixelRatio||1,2),showBanner:(message,type)=>{if(type==="error")fail("运行时发生错误。请重新加载；如果重复出现，请将报错截图发给作者。 "+message);else console.warn(message);}};
