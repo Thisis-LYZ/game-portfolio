@@ -50,7 +50,7 @@
   windowed.type="button";windowed.textContent="网页游玩";windowed.setAttribute("aria-pressed","true");
   fullscreen.textContent="全屏游玩";fullscreen.setAttribute("aria-pressed","false");
   fullscreen.replaceWith(modes);modes.append(windowed,fullscreen);
-  function homeLink(){const link=document.createElement("a");link.className="return-home";link.href=new URL("../../",location.href).href;link.textContent="返回主页";return link;}
+  function homeLink(){const link=document.createElement("a");link.className="return-home";link.href=new URL("../../",document.baseURI).href;link.target="_top";link.textContent="返回主页";return link;}
   modes.prepend(homeLink());
   fullscreenToolbar.id="fullscreen-toolbar";
   const modeLabel=document.createElement("span");modeLabel.textContent="黎明之路 · 全屏游玩";
