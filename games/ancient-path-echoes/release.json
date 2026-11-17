@@ -1,0 +1,29 @@
+{
+  "title": "古道回响",
+  "release": "v48",
+  "accepted": true,
+  "chapters": 3,
+  "sequentialUnlock": true,
+  "buildFiles": [
+    {
+      "name": "v48.data.unityweb",
+      "bytes": 21822405,
+      "sha256": "3b1eab1bd1134ab32c895878a39f4b3216ca690055fffce97ea08d2269634db5"
+    },
+    {
+      "name": "v48.framework.js.unityweb",
+      "bytes": 78412,
+      "sha256": "6e2475e588b737e2d2bfbe58419bfdff3a19ed2d033b19751662a3f16ac23c31"
+    },
+    {
+      "name": "v48.loader.js",
+      "bytes": 47867,
+      "sha256": "e2db1ca6f0c373b28e280a6daeaf3d8010e29306b61d4e8101afa18d38313e72"
+    },
+    {
+      "name": "v48.wasm.unityweb",
+      "bytes": 4171658,
+      "sha256": "fdab5999f174c317c2801e413cd31fb9945b013bb5357b24748ab5c884c5283b"
+    }
+  ]
+}
